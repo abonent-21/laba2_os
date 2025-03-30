@@ -1,0 +1,89 @@
+eorge-pc@george-pc:~/os_laba_2/3/3_1$ ps -S
+    PID TTY      STAT   TIME COMMAND
+   2376 tty2     Ssl+   0:00 /usr/libexec/gdm-wayland-session env GNOME_SHELL_SE
+   2388 tty2     Sl+    0:00 /usr/libexec/gnome-session-binary --session=ubuntu
+   8118 pts/1    Ss     0:00 bash
+  23336 pts/1    R+     0:00 ps -S
+george-pc@george-pc:~/os_laba_2/3/3_1$ ./father.out
+Father PID=23337
+son1: PID=23338
+son3: PID=23340
+son2: PID=23339
+son3: Received SIGTERM. Exiting...
+SIG: 15
+Signals sent. Check before_kill.log and after_kill.log
+george-pc@george-pc:~/os_laba_2/3/3_1$ ps -S
+
+    PID TTY      STAT   TIME COMMAND
+   2376 tty2     Ssl+   0:00 /usr/libexec/gdm-wayland-session env GNOME_SHELL_SE
+   2388 tty2     Sl+    0:00 /usr/libexec/gnome-session-binary --session=ubuntu
+   8118 pts/1    Ss     0:01 bash
+  23339 pts/1    S      0:00 son2.out
+  23347 pts/1    R+     0:00 ps -S
+george-pc@george-pc:~/os_laba_2/3/3_1$ 
+george-pc@george-pc:~/os_laba_2/3/3_1$ cat before_kill.log 
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000    8118    5613  0  80   0 -  2789 do_wai pts/1    00:00:00 bash
+0 S  1000   23337    8118  0  80   0 -   670 do_wai pts/1    00:00:00 father.out
+0 S  1000   23338   23337  0  80   0 -   670 hrtime pts/1    00:00:00 son1.out
+0 S  1000   23339   23337  0  80   0 -   670 hrtime pts/1    00:00:00 son2.out
+0 S  1000   23340   23337  0  80   0 -   670 hrtime pts/1    00:00:00 son3.out
+0 S  1000   23341   23337  0  80   0 -   700 do_wai pts/1    00:00:00 sh
+4 R  1000   23342   23341  0  80   0 -  3480 -      pts/1    00:00:00 ps
+george-pc@george-pc:~/os_laba_2/3/3_1$ cat after_kill.log 
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000    8118    5613  0  80   0 -  2789 do_wai pts/1    00:00:00 bash
+0 S  1000   23337    8118  0  80   0 -   670 do_wai pts/1    00:00:00 father.out
+0 Z  1000   23338   23337  0  80   0 -     0 -      pts/1    00:00:00 son1.out
+0 S  1000   23339   23337  0  80   0 -   670 hrtime pts/1    00:00:00 son2.out
+0 Z  1000   23340   23337  0  80   0 -     0 -      pts/1    00:00:00 son3.out
+0 S  1000   23345   23337  0  80   0 -   700 do_wai pts/1    00:00:00 sh
+4 R  1000   23346   23345 99  80   0 -  3480 -      pts/1    00:00:00 ps
+george-pc@george-pc:~/os_laba_2/3/3_1$ vim father.c
+george-pc@george-pc:~/os_laba_2/3/3_1$ gcc father.c -o father.out
+george-pc@george-pc:~/os_laba_2/3/3_1$ ./father
+bash: ./father: No such file or directory
+george-pc@george-pc:~/os_laba_2/3/3_1$ ./father.out 
+Father PID=23651
+son1: PID=23652
+son2: PID=23653
+son3: PID=23654
+son3: Received SIGTERM. Exiting...
+SIG: 15
+Signals sent. Check before_kill.log and after_kill.log
+george-pc@george-pc:~/os_laba_2/3/3_1$ cat before_kill.log 
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000    8118    5613  0  80   0 -  2789 do_wai pts/1    00:00:00 bash
+0 S  1000   23339    2240  0  80   0 -   670 hrtime pts/1    00:00:00 son2.out
+0 S  1000   23651    8118  0  80   0 -   670 do_wai pts/1    00:00:00 father.out
+0 S  1000   23652   23651  0  80   0 -   670 hrtime pts/1    00:00:00 son1.out
+0 S  1000   23653   23651  0  80   0 -   670 hrtime pts/1    00:00:00 son2.out
+0 S  1000   23654   23651  0  80   0 -   670 hrtime pts/1    00:00:00 son3.out
+0 S  1000   23655   23651  0  80   0 -   700 do_wai pts/1    00:00:00 sh
+4 R  1000   23656   23655  0  80   0 -  3480 -      pts/1    00:00:00 ps
+george-pc@george-pc:~/os_laba_2/3/3_1$ cat after_kill.log 
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000    8118    5613  0  80   0 -  2789 do_wai pts/1    00:00:00 bash
+0 S  1000   23339    2240  0  80   0 -   670 hrtime pts/1    00:00:00 son2.out
+0 S  1000   23651    8118  0  80   0 -   670 do_wai pts/1    00:00:00 father.out
+0 S  1000   23653   23651  0  80   0 -   670 hrtime pts/1    00:00:00 son2.out
+0 S  1000   23657   23651  0  80   0 -   700 do_wai pts/1    00:00:00 sh
+4 R  1000   23658   23657 99  80   0 -  3480 -      pts/1    00:00:00 ps
+george-pc@george-pc:~/os_laba_2/3/3_1$ 
+
+
+###
+    son1 завершился (реакция по умолчанию на SIGTERM).
+
+    son2 остался работать (игнорирует сигнал).
+
+    son3 завершился, выполнив пользовательский обработчик.
+
+Выводы
+
+    Реакция по умолчанию (son1): Процесс завершается при получении SIGTERM.
+
+    Игнорирование сигнала (son2): Процесс продолжает работу.
+
+    Пользовательский обработчик (son3): Позволяет выполнить произвольный код перед завершением.
+###

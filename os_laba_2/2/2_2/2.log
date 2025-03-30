@@ -1,0 +1,39 @@
+george-pc@george-pc:~/os_laba_2/2/2_2$ ls
+father                 father.c              son    son_processes.log
+father_after_wait.log  father_processes.log  son.c
+george-pc@george-pc:~/os_laba_2/2/2_2$ touch 2.log
+george-pc@george-pc:~/os_laba_2/2/2_2$ ./father
+Father: PID=8178, PPID=5621
+Son:    PID=8181, PPID=8178
+Son: Exiting...
+Father: Child process finished.
+george-pc@george-pc:~/os_laba_2/2/2_2$ ./father &
+[2] 8186
+george-pc@george-pc:~/os_laba_2/2/2_2$ Father: PID=8186, PPID=5621
+Son:    PID=8189, PPID=8186
+Son: Exiting...
+Father: Child process finished.
+
+[2]-  Done                    ./father
+
+###
+При запуске в обычном режиме:
+
+    Родительский процесс (PID=8186) создает потомка через fork().
+
+    Потомок заменяет свой код на son через execl().
+
+    Родитель ждет завершения потомка через wait().
+    
+
+При запуске в фоновом режиме (./father &):
+
+    Родительский процесс запускается в фоне, но wait() блокирует его до завершения потомка.
+
+Разделение адресных пространств:
+	Родитель и потомок работают в независимых адресных пространствах. Изменения в одном процессе не влияют на другой.
+
+Конкуренция за CPU:
+	При фоновом запуске процессы конкурируют за ресурсы, но wait() синхронизирует выполнение.
+    
+###S  

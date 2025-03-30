@@ -1,0 +1,51 @@
+# & - для запуска утилит в фотовом режиме
+
+george-pc@george-pc:~/os_laba_2/1$ sleep 10 &
+[1] 41017
+george-pc@george-pc:~/os_laba_2/1$ sleep 15 &
+[2] 41022
+george-pc@george-pc:~/os_laba_2/1$ sleep 20 &
+[3] 41065
+[1]   Done                    sleep 10
+george-pc@george-pc:~/os_laba_2/1$ jobs
+[2]-  Running                 sleep 15 &
+[3]+  Running                 sleep 20 &
+george-pc@george-pc:~/os_laba_2/1$ jobs
+[2]-  Done                    sleep 15
+[3]+  Running                 sleep 20 &
+george-pc@george-pc:~/os_laba_2/1$ jobs
+[3]+  Done                    sleep 20
+
+####
+[1], [2], [3] — номера заданий.
+
++ обозначает текущее задание, с которым будут взаимодействовать команды по умолчанию.
+
+- обозначает следующее задание.
+####
+
+george-pc@george-pc:~/os_laba_2/1$ sleep 5 &
+[1] 42327
+george-pc@george-pc:~/os_laba_2/1$ notify %1
+[1]+  Done                    sleep 5
+
+# fg - возвращает N задание на передний план
+
+george-pc@george-pc:~/os_laba_2/1$ sleep 7 &
+[1] 42538
+george-pc@george-pc:~/os_laba_2/1$ sleep 10 &
+[2] 42544
+george-pc@george-pc:~/os_laba_2/1$ fg %2
+sleep 10
+[1]   Done                    sleep 7
+
+# fg %2 вернуло 2 задание на передний план
+
+# kill - отменяет невыполненное задание
+
+george-pc@george-pc:~/os_laba_2/1$ sleep 10 &
+[1] 43610
+george-pc@george-pc:~/os_laba_2/1$ kill %1
+george-pc@george-pc:~/os_laba_2/1$ jobs
+[1]+  Terminated              sleep 10
+

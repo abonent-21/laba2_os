@@ -1,0 +1,23 @@
+# UID (User Identifier) — это идентификатор пользователя, который владеет процессом
+
+george-pc@george-pc:~/os_laba_2/1$ ps -o pid,uid,comm
+    PID   UID COMMAND
+  45240  1000 bash
+  48029  1000 ps -o pid,uid,command
+
+# pid — идентификатор процесса.
+# uid — идентификатор пользователя.
+# comm — имя команды.
+
+# Минимальное значение UID в Linux равно 0. Оно принадлежит суперпользователю (root)
+
+george-pc@george-pc:~/os_laba_2/1$ sudo ps -o pid,uid,comm
+[sudo] password for george-pc: 
+    PID   UID COMMAND
+  48523     0 sudo
+  48524     0 ps
+ 
+# Минимальное значение PID: это 1. Оно принадлежит процессу init (или systemd в современных системах), который 
+# является родительским процессом для всех остальных процессов.
+
+# Максимальное значение PID: Оно определяется значением /proc/sys/kernel/pid_max. 

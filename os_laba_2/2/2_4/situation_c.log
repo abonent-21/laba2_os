@@ -1,0 +1,4 @@
+    PID    PPID S COMMAND
+  13291    5621 S ./father.out
+  13294   13291 Z [father.out] <defunct>
+  13296   13291 Z [father.out] <defunct>

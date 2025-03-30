@@ -1,0 +1,30 @@
+george-pc@george-pc:~/os_laba_2/3/3_2$ ls
+george-pc@george-pc:~/os_laba_2/3/3_2$ vim 3_task.c
+george-pc@george-pc:~/os_laba_2/3/3_2$ gcc 3_task.c 
+george-pc@george-pc:~/os_laba_2/3/3_2$ ./a.out 
+Child1 (PID=25357) started
+Child2 (PID=25358) started
+Parent (PID=25356) waiting for child2 (PID=25358)...
+Child3 (PID=25359) started
+Child3 exiting
+Child1 exiting
+Child2 exiting
+Child2 exited with status: 20
+Parent exiting
+george-pc@george-pc:~/os_laba_2/3/3_2$ ps -l
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000    8118    5613  0  80   0 -  2820 do_wai pts/1    00:00:00 bash
+4 R  1000   25364    8118 99  80   0 -  3479 -      pts/1    00:00:00 ps
+george-pc@george-pc:~/os_laba_2/3/3_2$ vim 2.log
+
+    waitpid() позволяет избирательно ожидать завершения конкретного процесса по его PID.
+
+    SIGCHLD используется для асинхронного уведомления родителя о завершении потомков.
+
+    Игнорирование SIGCHLD или использование wait()/waitpid() предотвращает появление зомби-процессов.
+
+    Эксперимент демонстрирует, как можно управлять завершением дочерних процессов, используя waitpid(), и анализировать их статусы.
+
+Возвращаемое значение wait(&status)
+
+Функция wait() приостанавливает выполнение родительского процесса до завершения любого из его дочерних процессов.

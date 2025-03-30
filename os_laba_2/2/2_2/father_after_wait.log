@@ -1,0 +1,6 @@
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000    5621    5613  0  80   0 -  2948 do_sel pts/0    00:00:00 bash
+0 T  1000    5628    5621  0  80   0 -  5761 do_sig pts/0    00:00:00 python
+0 S  1000    8186    5621  0  80   0 -   670 do_wai pts/0    00:00:00 father
+0 S  1000    8192    8186  0  80   0 -   700 do_wai pts/0    00:00:00 sh
+4 R  1000    8193    8192  0  80   0 -  3445 -      pts/0    00:00:00 ps
